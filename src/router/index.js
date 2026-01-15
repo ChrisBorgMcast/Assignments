@@ -5,7 +5,7 @@ import AddBookingView from "../views/AddBookingView.vue"
 import EditBookingView from "../views/EditBookingView.vue"
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory("/Assignments/"),
   routes: [
     { path: "/", name: "home", component: HomeView },
     { path: "/listings", name: "listings", component: ListingsView },
