@@ -162,20 +162,17 @@
 
           <!-- Total Price Field -->
           <div class="mb-3">
-            <label for="totalPrice" class="form-label" :style="{ color: errors.totalPrice && touched.totalPrice ? '#FFFFFF' : '#28A745', fontWeight: 600 }">Total Price</label>
+            <label for="totalPrice" class="form-label" :style="{ color: '#28A745', fontWeight: 600 }">Total Price (Auto-calculated)</label>
             <input
               id="totalPrice"
               v-model.number="form.totalPrice"
               type="number"
               class="form-control"
-              :style="{ backgroundColor: '#FFFFFF', color: '#333', border: errors.totalPrice && touched.totalPrice ? '2px solid #FFC107' : '2px solid #6C757D', borderRadius: '8px' }"
-              placeholder="Enter price"
-              @blur="validateTotalPrice"
-              @input="validateTotalPrice"
+              :style="{ backgroundColor: '#E8F5E9', color: '#28A745', border: '2px solid #28A745', borderRadius: '8px', fontWeight: 600 }"
+              placeholder="Price will be calculated"
+              disabled
             />
-            <div v-if="errors.totalPrice && touched.totalPrice" class="text-white mt-1" style="font-size: 0.875rem; font-weight: 500;">
-              {{ errors.totalPrice }}
-            </div>
+            <small style="color: #A8E6A1; display: block; margin-top: 5px;">Price is automatically calculated based on room type and number of nights</small>
           </div>
 
           <!-- Services Field -->
@@ -265,6 +262,7 @@
 <script>
 import BackButton from '@/components/BackButton.vue'
 import bookingsService from '@/services/bookingsService.js'
+import rooms from '@/data/rooms.json'
 
 export default {
   components: {
@@ -285,6 +283,7 @@ export default {
         phoneNumber: '',
         postalCode: ''
       },
+      rooms: rooms,
       errors: {
         guestName: '',
         hotelName: '',
@@ -326,6 +325,21 @@ export default {
     }
   },
   methods: {
+    calculatePrice() {
+      if (!this.form.roomType || !this.form.checkIn || !this.form.checkOut) {
+        this.form.totalPrice = 0
+        return
+      }
+
+      const room = this.rooms.find(r => r.type === this.form.roomType)
+      if (!room) return
+
+      const checkIn = new Date(this.form.checkIn)
+      const checkOut = new Date(this.form.checkOut)
+      const nights = Math.max(1, Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24)))
+
+      this.form.totalPrice = room.pricePerNight * nights
+    },
     validateGuestName() {
       this.touched.guestName = true
       const name = this.form.guestName.trim()
@@ -394,6 +408,7 @@ export default {
         this.errors.roomType = 'Room type is required'
       } else {
         this.errors.roomType = ''
+        this.calculatePrice()
       }
     },
     validateCheckIn() {
@@ -403,6 +418,7 @@ export default {
       } else {
         this.errors.checkIn = ''
         if (this.form.checkOut) this.validateCheckOut()
+        this.calculatePrice()
       }
     },
     validateCheckOut() {
@@ -413,6 +429,7 @@ export default {
         this.errors.checkOut = 'Check-out must be after check-in'
       } else {
         this.errors.checkOut = ''
+        this.calculatePrice()
       }
     },
     validateTotalPrice() {

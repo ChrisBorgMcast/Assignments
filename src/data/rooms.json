@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "type": "Standard",
+    "pricePerNight": 150
+  },
+  {
+    "id": 2,
+    "type": "Deluxe",
+    "pricePerNight": 250
+  },
+  {
+    "id": 3,
+    "type": "Deluxe Ocean View",
+    "pricePerNight": 350
+  },
+  {
+    "id": 4,
+    "type": "Executive Suite",
+    "pricePerNight": 400
+  },
+  {
+    "id": 5,
+    "type": "Family Room",
+    "pricePerNight": 300
+  },
+  {
+    "id": 6,
+    "type": "Penthouse",
+    "pricePerNight": 500
+  }
+]
