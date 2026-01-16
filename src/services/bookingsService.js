@@ -1,18 +1,11 @@
+// Database operations - handles bookings CRUD (Create, Read, Update, Delete)
 import { collection, doc, getDocs, getDoc, addDoc, updateDoc, deleteDoc, query, where, Timestamp } from 'firebase/firestore'
 import { db } from '../firebase'
 
-// Collection reference
 const COLLECTION_NAME = 'bookings'
 
-/**
- * Bookings Service - All CRUD operations in one place
- */
 const bookingsService = {
-  /**
-   * CREATE - Add a new booking
-   * @param {Object} bookingData - The booking data to add
-   * @returns {Promise<Object>} - The added booking with its ID
-   */
+  // Create new booking
   async createBooking(bookingData) {
     try {
       const docRef = await addDoc(collection(db, COLLECTION_NAME), {
@@ -29,10 +22,7 @@ const bookingsService = {
     }
   },
 
-  /**
-   * READ - Get all bookings
-   * @returns {Promise<Array>} - Array of all bookings
-   */
+  // Get all bookings
   async getAllBookings() {
     try {
       const querySnapshot = await getDocs(collection(db, COLLECTION_NAME))

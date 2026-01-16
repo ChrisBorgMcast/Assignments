@@ -1,9 +1,9 @@
-// Import the functions you need from the SDKs you need
+// Firebase setup - connect to database
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyAh9H1AESxnhpwWklgtNpYq4qtQcdYLhj8",
   authDomain: "vueassignment-ddf66.firebaseapp.com",

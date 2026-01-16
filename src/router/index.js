@@ -1,9 +1,11 @@
+// Router setup - define all app routes
 import { createRouter, createWebHashHistory } from "vue-router"
 import HomeView from "../views/HomeView.vue"
 import ListingsView from "../views/ListingsView.vue"
 import AddBookingView from "../views/AddBookingView.vue"
 import EditBookingView from "../views/EditBookingView.vue"
 
+// Create router with all pages
 const router = createRouter({
   history: createWebHashHistory("/Assignments/"),
   routes: [
