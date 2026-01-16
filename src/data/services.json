@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "breakfast",
+    "label": "Breakfast",
+    "price": 25
+  },
+  {
+    "id": 2,
+    "name": "spa",
+    "label": "Spa",
+    "price": 75
+  },
+  {
+    "id": 3,
+    "name": "parking",
+    "label": "Parking",
+    "price": 15
+  },
+  {
+    "id": 4,
+    "name": "gym",
+    "label": "Gym",
+    "price": 20
+  },
+  {
+    "id": 5,
+    "name": "airport-transfer",
+    "label": "Airport Transfer",
+    "price": 50
+  }
+]

@@ -186,8 +186,9 @@
                 class="form-check-input"
                 style="border-color: #28A745;"
                 value="breakfast"
+                @change="onServiceChange"
               />
-              <label class="form-check-label" for="breakfast" style="color: #A8E6A1;">Breakfast</label>
+              <label class="form-check-label" for="breakfast" style="color: #A8E6A1;">Breakfast - $25/night</label>
             </div>
             <div class="form-check">
               <input
@@ -197,8 +198,9 @@
                 class="form-check-input"
                 style="border-color: #28A745;"
                 value="spa"
+                @change="onServiceChange"
               />
-              <label class="form-check-label" for="spa" style="color: #A8E6A1;">Spa</label>
+              <label class="form-check-label" for="spa" style="color: #A8E6A1;">Spa - $75/night</label>
             </div>
             <div class="form-check">
               <input
@@ -208,8 +210,9 @@
                 class="form-check-input"
                 style="border-color: #28A745;"
                 value="parking"
+                @change="onServiceChange"
               />
-              <label class="form-check-label" for="parking" style="color: #A8E6A1;">Parking</label>
+              <label class="form-check-label" for="parking" style="color: #A8E6A1;">Parking - $15/night</label>
             </div>
             <div class="form-check">
               <input
@@ -219,8 +222,9 @@
                 class="form-check-input"
                 style="border-color: #28A745;"
                 value="gym"
+                @change="onServiceChange"
               />
-              <label class="form-check-label" for="gym" style="color: #A8E6A1;">Gym</label>
+              <label class="form-check-label" for="gym" style="color: #A8E6A1;">Gym - $20/night</label>
             </div>
             <div class="form-check">
               <input
@@ -230,8 +234,9 @@
                 class="form-check-input"
                 style="border-color: #28A745;"
                 value="airport-transfer"
+                @change="onServiceChange"
               />
-              <label class="form-check-label" for="airport-transfer" style="color: #A8E6A1;">Airport Transfer</label>
+              <label class="form-check-label" for="airport-transfer" style="color: #A8E6A1;">Airport Transfer - $50/night</label>
             </div>
           </div>
 
@@ -263,6 +268,7 @@
 import BackButton from '@/components/BackButton.vue'
 import bookingsService from '@/services/bookingsService.js'
 import rooms from '@/data/rooms.json'
+import services from '@/data/services.json'
 
 export default {
   components: {
@@ -284,6 +290,7 @@ export default {
         postalCode: ''
       },
       rooms: rooms,
+      services: services,
       errors: {
         guestName: '',
         hotelName: '',
@@ -338,7 +345,19 @@ export default {
       const checkOut = new Date(this.form.checkOut)
       const nights = Math.max(1, Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24)))
 
-      this.form.totalPrice = room.pricePerNight * nights
+      // Calculate room price
+      let roomPrice = room.pricePerNight * nights
+
+      // Add services price
+      let servicesPrice = 0
+      this.form.services.forEach(serviceName => {
+        const service = this.services.find(s => s.name === serviceName)
+        if (service) {
+          servicesPrice += service.price * nights // Services are per night
+        }
+      })
+
+      this.form.totalPrice = roomPrice + servicesPrice
     },
     validateGuestName() {
       this.touched.guestName = true
@@ -431,6 +450,9 @@ export default {
         this.errors.checkOut = ''
         this.calculatePrice()
       }
+    },
+    onServiceChange() {
+      this.calculatePrice()
     },
     validateTotalPrice() {
       this.touched.totalPrice = true
