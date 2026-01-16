@@ -31,7 +31,7 @@
     "id": 5,
     "name": "airport-transfer",
     "label": "Airport Transfer",
-    "price": 0,
+    "price": 50,
     "perNight": false
   }
 ]

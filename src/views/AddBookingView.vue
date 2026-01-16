@@ -236,7 +236,7 @@
                 value="airport-transfer"
                 @change="onServiceChange"
               />
-              <label class="form-check-label" for="airport-transfer" style="color: #A8E6A1;">Airport Transfer - FREE (One-time)</label>
+              <label class="form-check-label" for="airport-transfer" style="color: #A8E6A1;">Airport Transfer - $50 (One-time)</label>
             </div>
           </div>
 
