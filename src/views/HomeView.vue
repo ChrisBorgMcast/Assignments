@@ -1,4 +1,5 @@
 <template>
+  <!-- Home page - welcome and navigation -->
   <div class="container py-5" style="background: transparent;">
     <BackButton />
     <div class="row mb-5">
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+// Home page - welcome and navigation
 import BackButton from '@/components/BackButton.vue'
 import { RouterLink } from 'vue-router'
 
@@ -63,6 +65,7 @@ export default {
 </script>
 
 <style scoped>
+/* Card hover effect */
 .card {
   transition: transform 0.2s, box-shadow 0.2s;
 }

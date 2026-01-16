@@ -1,4 +1,5 @@
 <template>
+  <!-- Form to create new booking with auto-calculated pricing -->
   <div class="container py-5" style="background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%); min-height: 100vh; border-radius: 8px;">
     <BackButton />
     <div class="row">
@@ -265,6 +266,7 @@
 </template>
 
 <script>
+// Import components and data
 import BackButton from '@/components/BackButton.vue'
 import bookingsService from '@/services/bookingsService.js'
 import rooms from '@/data/rooms.json'
@@ -276,6 +278,7 @@ export default {
   },
   data() {
     return {
+      // Form data for new booking
       form: {
         guestName: '',
         hotelName: '',

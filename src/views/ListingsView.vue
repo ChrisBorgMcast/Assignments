@@ -1,4 +1,5 @@
 <template>
+  <!-- View all bookings in a table -->
   <div class="container py-5" style="background: linear-gradient(135deg, #1F1F1F 0%, #2C2C2C 100%); min-height: 100vh; border-radius: 8px;">
     <BackButton />
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -99,7 +100,6 @@ export default {
     this.fetchBookings()
   },
   methods: {
-    // Fetch all bookings from Firestore
     async fetchBookings() {
       this.loading = true
       try {
@@ -111,14 +111,11 @@ export default {
         this.loading = false
       }
     },
-
-    // Delete a booking
     async deleteBooking(id) {
       if (confirm('Are you sure you want to delete this booking?')) {
         try {
           this.deletingId = id
           await bookingsService.deleteBooking(id)
-          // Add slight delay for animation
           setTimeout(() => {
             this.bookings = this.bookings.filter(b => b.id !== id)
             this.deletingId = null
@@ -134,46 +131,29 @@ export default {
       }
     },
 
-    // FORMATTING METHODS - Required by rubric SE2.1
-    
-    // Trim spaces from text (removes leading/trailing whitespace)
     trimText(text) {
       return String(text ?? '').trim()
     },
-    
-    // Convert to UPPERCASE
     toUpperCase(text) {
       return this.trimText(text).toUpperCase()
     },
-    
-    // Convert to lowercase
     toLowerCase(text) {
       return this.trimText(text).toLowerCase()
     },
-    
-    // Get first 3 characters only
     getFirst3(text) {
       return this.trimText(text).slice(0, 3)
     },
-    
-    // Add + sign prefix to numbers
     addPlusSign(value) {
       return `+${value}`
     },
-
-    // Mixed formatting: Uppercase first half, lowercase second half
     formatUpperLower(text) {
       const trimmed = this.trimText(text)
       const mid = Math.ceil(trimmed.length / 2)
       return trimmed.substring(0, mid).toUpperCase() + trimmed.substring(mid).toLowerCase()
     },
-    
-    // Format price with + sign
     formatPrice(price) {
       return this.addPlusSign(`$${Number(price).toFixed(2)}`)
     },
-    
-    // Format status with + sign and trim
     formatStatus(status) {
       return this.addPlusSign(this.trimText(status))
     }

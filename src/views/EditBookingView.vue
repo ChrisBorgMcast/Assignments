@@ -53,8 +53,6 @@ async function submit() {
   try {
     saving.value = true
     error.value = ""
-    
-    // Check if room is available (excluding current booking)
     const isAvailable = await bookingsService.isRoomAvailable(
       form.hotelName,
       form.roomNumber,
@@ -62,13 +60,11 @@ async function submit() {
       form.checkOut,
       id
     )
-    
     if (!isAvailable) {
       error.value = `Room ${form.roomNumber} at ${form.hotelName} is already booked for these dates. Please select different dates or room.`
       saving.value = false
       return
     }
-    
     await bookingsService.updateBooking(id, {
       guestName: form.guestName,
       hotelName: form.hotelName,
