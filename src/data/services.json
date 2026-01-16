@@ -3,30 +3,35 @@
     "id": 1,
     "name": "breakfast",
     "label": "Breakfast",
-    "price": 25
+    "price": 25,
+    "perNight": true
   },
   {
     "id": 2,
     "name": "spa",
     "label": "Spa",
-    "price": 75
+    "price": 75,
+    "perNight": true
   },
   {
     "id": 3,
     "name": "parking",
     "label": "Parking",
-    "price": 15
+    "price": 15,
+    "perNight": true
   },
   {
     "id": 4,
     "name": "gym",
     "label": "Gym",
-    "price": 20
+    "price": 20,
+    "perNight": true
   },
   {
     "id": 5,
     "name": "airport-transfer",
     "label": "Airport Transfer",
-    "price": 50
+    "price": 0,
+    "perNight": false
   }
 ]

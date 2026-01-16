@@ -236,7 +236,7 @@
                 value="airport-transfer"
                 @change="onServiceChange"
               />
-              <label class="form-check-label" for="airport-transfer" style="color: #A8E6A1;">Airport Transfer - $50/night</label>
+              <label class="form-check-label" for="airport-transfer" style="color: #A8E6A1;">Airport Transfer - FREE (One-time)</label>
             </div>
           </div>
 
@@ -353,7 +353,8 @@ export default {
       this.form.services.forEach(serviceName => {
         const service = this.services.find(s => s.name === serviceName)
         if (service) {
-          servicesPrice += service.price * nights // Services are per night
+          // If perNight is true, multiply by nights; otherwise it's a one-time fee
+          servicesPrice += service.perNight ? service.price * nights : service.price
         }
       })
 
